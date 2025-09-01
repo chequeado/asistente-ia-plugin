@@ -2,12 +2,14 @@
 
 **Asistente con IA para periodistas y chequeadores**
 
-Extensión de navegador desarrollado para organizaciones orientadas al periodismo y fact-checking que buscan acelerar su proceso de adopción de IA en redacciones y otras áreas. Cuenta con una serie de tareas precargadas, 100% personalizables y la posibilidad de agregar nuevas tareas de forma rápida y sencilla. 
+Extensión de navegador desarrollado para organizaciones orientadas al periodismo y fact-checking que resuelve tareas clave del trabajo diario de periodistas de forma automática utilizando Inteligencia Artificial. Está especialmente diseñado para organizaciones que buscan acelerar su proceso de adopción de IA en redacciones y otras áreas. Cuenta con una serie de tareas precargadas, 100% personalizables y la posibilidad de agregar nuevas tareas de forma rápida y sencilla. 
 
 Para ver más prompts (disponibles en español, portugués e inglés), se puede acceder a la [base regional de prompts](https://github.com/chequeado/asistente-ia-plugin/wiki). Esta versión local funciona conectándose directamente con la API de OpenAI. Incluye todas las funcionalidades principales del asistente, incluyendo gestión y personalización de tareas. Requiere una clave de API de OpenAI para ejecutar las tareas de IA. 
 
-Esta extensión fue desarrollada en el marco del proyecto de JournalismAI Innovation Challenge, "Empoderando redacciones pequeñas con Inteligencia Artificial", de [Chequeado](https://chequeado.com), y cuenta con la colaboración de [La Silla Vacía](https://lasillavacia.com) (Colombia), [Projecto Comprova](https://projetocomprova.com.br/) (Brasil) y [Factchequeado](https://factchequeado.com) (Estados Unidos).
+Esta extensión fue desarrollada en el marco del proyecto de JournalismAI Innovation Challenge *"Empoderando redacciones pequeñas con Inteligencia Artificial"*, de [Chequeado](https://chequeado.com)
 
+Agradecemos el aporte de [La Silla Vacía](https://lasillavacia.com) (Colombia), [Projecto Comprova](https://projetocomprova.com.br/) (Brasil) y [Factchequeado](https://factchequeado.com) (Estados Unidos) como usuarios de prueba que aportaron valioso feedback para el desarrollo de este proyecto y también por las instrucciones que aportaron a la base regional. 
+ 
 <img width="600" height="444" alt="Captura de pantalla de 2025-09-01 18-39-12" src="https://github.com/user-attachments/assets/f3dc89b6-8088-4b10-8428-c56df9c7684f" style="border: 2px solid gray; border-radius: 5px;" />
 
 
