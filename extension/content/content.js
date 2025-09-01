@@ -1,4 +1,4 @@
-// content/content.js - VERSIÓN LOCAL OPTIMIZADA
+// content/content.js - VERSIÓN LOCAL OPTIMIZADA - SEGURA
 
 // Variables globales
 let currentTaskExecutionId = null;
@@ -6,25 +6,118 @@ let currentTaskType = null;
 let currentInputText = '';
 let uploadedAttachmentIds = [];
 
-// Listen for messages from the popup
+// Lista de acciones permitidas para validación
+const ALLOWED_POPUP_ACTIONS = [
+  'ping', 'checkSelection', 'processWithBackend'
+];
+
+// CORRECCIÓN VULNERABILIDAD #1: Función de sanitización de HTML
+function sanitizeHTML(html) {
+  if (!html || typeof html !== 'string') return '';
+  
+  // Crear un elemento temporal para parsear el HTML
+  const temp = document.createElement('div');
+  temp.innerHTML = html;
+  
+  // Lista de elementos peligrosos
+  const dangerousElements = [
+    'script', 'iframe', 'embed', 'object', 'applet', 
+    'form', 'input', 'button', 'select', 'textarea',
+    'link', 'meta', 'style'
+  ];
+  
+  // Remover elementos peligrosos
+  dangerousElements.forEach(tagName => {
+    const elements = temp.querySelectorAll(tagName);
+    elements.forEach(el => el.remove());
+  });
+  
+  // Remover todos los atributos que pueden ejecutar JavaScript
+  const allElements = temp.querySelectorAll('*');
+  allElements.forEach(el => {
+    // Lista de atributos peligrosos
+    const dangerousAttrs = [
+      'onclick', 'onload', 'onerror', 'onmouseover', 'onmouseout',
+      'onkeydown', 'onkeyup', 'onchange', 'onsubmit', 'onreset',
+      'onfocus', 'onblur', 'onabort', 'onbeforeunload', 'onunload',
+      'onresize', 'onscroll', 'onselect', 'ondblclick', 'onmousedown',
+      'onmouseup', 'onmousemove', 'oncontextmenu', 'ondrag', 'ondrop',
+      'javascript:', 'vbscript:', 'data:'
+    ];
+    
+    // Remover atributos peligrosos
+    dangerousAttrs.forEach(attr => {
+      if (el.hasAttribute(attr)) {
+        el.removeAttribute(attr);
+      }
+    });
+    
+    // Verificar que href y src no tengan javascript:
+    ['href', 'src', 'action'].forEach(attr => {
+      if (el.hasAttribute(attr)) {
+        const value = el.getAttribute(attr).toLowerCase();
+        if (value.includes('javascript:') || value.includes('vbscript:') || value.startsWith('data:')) {
+          el.removeAttribute(attr);
+        }
+      }
+    });
+  });
+  
+  return temp.innerHTML;
+}
+
+// CORRECCIÓN VULNERABILIDAD #2: Validación de origen
+function isValidMessageSender(sender) {
+  // Verificar que el mensaje viene de nuestra extensión
+  if (!sender || sender.id !== chrome.runtime.id) {
+    return false;
+  }
+  return true;
+}
+
+// Listen for messages from the popup with validation
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-  if (message.action === 'ping') {
-    sendResponse({status: 'alive'});
-    return;
+  // CORRECCIÓN: Validar origen del mensaje
+  if (!isValidMessageSender(sender)) {
+    console.warn('Mensaje rechazado en content script: origen no válido');
+    sendResponse({ error: 'Origen no autorizado' });
+    return false;
   }
   
-  if (message.action === 'checkSelection') {
-    const selection = window.getSelection();
-    const hasSelection = selection && selection.toString().trim().length > 0;
-    sendResponse({hasSelection: hasSelection});
-    return;
+  // Validar acción permitida
+  if (!message || !message.action || !ALLOWED_POPUP_ACTIONS.includes(message.action)) {
+    console.warn('Acción no permitida en content script:', message?.action);
+    sendResponse({ error: 'Acción no autorizada' });
+    return false;
   }
   
-  if (message.action === 'processWithBackend') {
-    processDocumentLocal(message.taskType, message.taskIcon, message.useSelectedText || false);
-    sendResponse({status: 'success'});
-    return;
+  // Procesar mensaje según la acción
+  try {
+    switch(message.action) {
+      case 'ping':
+        sendResponse({status: 'alive'});
+        break;
+        
+      case 'checkSelection':
+        const selection = window.getSelection();
+        const hasSelection = selection && selection.toString().trim().length > 0;
+        sendResponse({hasSelection: hasSelection});
+        break;
+        
+      case 'processWithBackend':
+        processDocumentLocal(message.taskType, message.taskIcon, message.useSelectedText || false);
+        sendResponse({status: 'success'});
+        break;
+        
+      default:
+        sendResponse({ error: 'Acción no reconocida' });
+    }
+  } catch (error) {
+    console.error('Error procesando mensaje:', error);
+    sendResponse({ error: error.message });
   }
+  
+  return true;
 });
 
 // Helper para enviar mensajes al background
@@ -242,7 +335,7 @@ async function executeTaskLocal(taskExecutionId, taskName, taskIcon) {
   }
 }
 
-// INTERFAZ DE RESULTADOS CON REFINAMIENTO (versión local)
+// INTERFAZ DE RESULTADOS CON REFINAMIENTO (versión local) - CORREGIDA XSS
 function showResultInterface(taskData, taskName, taskIcon) {
   removeAllContainers();
   
@@ -255,6 +348,9 @@ function showResultInterface(taskData, taskName, taskIcon) {
   let outputText = taskData.output_text || taskData.result || taskData.generated_content || 'Sin resultado';
   
   console.log('Mostrando resultado:', outputText ? outputText.substring(0, 100) + '...' : 'Sin contenido');
+  
+  // CORRECCIÓN VULNERABILIDAD #1: Sanitizar HTML antes de insertar
+  const sanitizedOutput = sanitizeHTML(outputText.replace(/```html/g, "").replace(/```/g, ""));
   
   resultContainer.innerHTML = `
     <div class="ch-card-header ch-draggable ch-d-flex ch-justify-content-between ch-align-items-center">
@@ -272,8 +368,8 @@ function showResultInterface(taskData, taskName, taskIcon) {
       </div>
     </div>
     <div class="ch-card-body" style="flex: 1; overflow-y: auto;">
-      <div class="ch-text-primary">
-        ${outputText.replace(/```html/g, "").replace(/```/g, "")}
+      <div class="ch-text-primary" id="result-content">
+        <!-- El contenido se insertará de forma segura aquí -->
       </div>
     </div>
     <div style="flex-shrink: 0;">
@@ -289,10 +385,14 @@ function showResultInterface(taskData, taskName, taskIcon) {
   
   document.body.appendChild(resultContainer);
   
+  // CORRECCIÓN VULNERABILIDAD #1: Insertar HTML sanitizado de forma segura
+  const resultContentDiv = document.getElementById('result-content');
+  resultContentDiv.innerHTML = sanitizedOutput;
+  
   // Event listeners
   document.getElementById('copy-result').addEventListener('click', async () => {
     try {
-      await copyRichText(outputText);
+      await copyRichText(sanitizedOutput);
       
       const btn = document.getElementById('copy-result');
       btn.textContent = '¡Copiado!';

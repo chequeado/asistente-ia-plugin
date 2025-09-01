@@ -1,8 +1,16 @@
-// background/background.js - VERSIÓN LOCAL CON OPENAI API DIRECTA
+// background/background.js - VERSIÓN LOCAL CON OPENAI API DIRECTA - SEGURA
 
 // Configuración OpenAI
 const OPENAI_API_URL = 'https://api.openai.com/v1';
 const DEFAULT_MODEL = 'gpt-5';
+
+// Lista de acciones permitidas para validación
+const ALLOWED_ACTIONS = [
+  'setApiKey', 'getApiKey', 'checkApiKey', 'clearApiKey',
+  'getAvailableTaskTypes', 'updateTask', 'createTask', 'setTasks',
+  'createTaskExecution', 'executeTask', 'getTaskStatus', 'refineTask',
+  'uploadAttachment', 'fetchDocContent'
+];
 
 class LocalStorageService {
   async setApiKey(apiKey) {
@@ -138,9 +146,7 @@ class OpenAIService {
     
     const requestBody = {
       model: this.model,
-      messages: processedMessages,
-      max_tokens: 2000,
-      temperature: 0.7
+      messages: processedMessages
     };
     
     return this.makeRequest('/chat/completions', {
@@ -289,9 +295,47 @@ const localStorageService = new LocalStorageService();
 const openAIService = new OpenAIService();
 const taskExecutionService = new TaskExecutionService();
 
-// Manejar mensajes
+// VALIDACIÓN DE SEGURIDAD - CORRIGE VULNERABILIDAD #2
+function isValidSender(sender) {
+  // Validar que el mensaje viene de la extensión
+  if (!sender || !sender.id) return false;
+  
+  // Verificar que es nuestra extensión
+  if (sender.id !== chrome.runtime.id) return false;
+  
+  // Si viene de una pestaña, verificar que es una URL válida
+  if (sender.tab && sender.tab.url) {
+    const url = new URL(sender.tab.url);
+    // Permitir solo http/https/file
+    const allowedProtocols = ['http:', 'https:', 'file:'];
+    if (!allowedProtocols.includes(url.protocol)) return false;
+  }
+  
+  return true;
+}
+
+function isValidAction(action) {
+  return ALLOWED_ACTIONS.includes(action);
+}
+
+// Manejar mensajes con validación de seguridad
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  // CORRECCIÓN VULNERABILIDAD #2: Validar origen del mensaje
+  if (!isValidSender(sender)) {
+    console.warn('Mensaje rechazado: origen no válido', sender);
+    sendResponse({ error: 'Origen no autorizado' });
+    return false;
+  }
+  
+  // Validar que la acción está permitida
+  if (!message || !message.action || !isValidAction(message.action)) {
+    console.warn('Acción no válida:', message?.action);
+    sendResponse({ error: 'Acción no autorizada' });
+    return false;
+  }
+  
   handleMessage(message, sender).then(sendResponse).catch(error => {
+    console.error('Error manejando mensaje:', error);
     sendResponse({ error: error.message });
   });
   

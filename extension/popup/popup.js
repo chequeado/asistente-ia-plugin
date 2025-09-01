@@ -1,4 +1,4 @@
-// popup/popup.js - VERSIÓN LOCAL CON OPENAI API KEY
+// popup/popup.js - VERSIÓN LOCAL CON OPENAI API KEY - SEGURA
 
 document.addEventListener('DOMContentLoaded', async function() {
   // Elementos DOM
@@ -33,6 +33,31 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
       });
     });
+  }
+  
+  // Validación básica de API Key (como estaba originalmente)
+  function validateApiKey(apiKey) {
+    if (!apiKey) {
+      return { isValid: false, error: 'Por favor ingresa tu API Key de OpenAI' };
+    }
+    
+    if (!apiKey.startsWith('sk-')) {
+      return { isValid: false, error: 'La API Key debe comenzar con "sk-"' };
+    }
+    
+    return { isValid: true, apiKey: apiKey.trim() };
+  }
+  
+  // SANITIZACIÓN DE INPUT
+  function sanitizeString(input, maxLength = 1000) {
+    if (!input || typeof input !== 'string') return '';
+    
+    return input
+      .trim()
+      .substring(0, maxLength)
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remover scripts
+      .replace(/javascript:/gi, '') // Remover javascript: URLs
+      .replace(/on\w+\s*=/gi, ''); // Remover event handlers
   }
   
   // FUNCIONALIDADES DE API KEY
@@ -115,18 +140,17 @@ document.addEventListener('DOMContentLoaded', async function() {
   async function handleApiKeySave(e) {
     e.preventDefault();
     
-    const apiKey = document.getElementById('apiKey').value.trim();
+    const rawApiKey = document.getElementById('apiKey').value;
     const saveBtn = document.getElementById('saveApiKeyBtn');
     
-    if (!apiKey) {
-      showApiKeyError('Por favor ingresa tu API Key de OpenAI');
+    // Validar API Key
+    const validation = validateApiKey(rawApiKey);
+    if (!validation.isValid) {
+      showApiKeyError(validation.error);
       return;
     }
     
-    if (!apiKey.startsWith('sk-')) {
-      showApiKeyError('La API Key debe comenzar con "sk-"');
-      return;
-    }
+    const apiKey = validation.apiKey;
     
     saveBtn.disabled = true;
     saveBtn.textContent = 'Validando...';
@@ -137,14 +161,6 @@ document.addEventListener('DOMContentLoaded', async function() {
       await sendToBackground({
         action: 'setApiKey',
         apiKey: apiKey
-      });
-      
-      // Hacer una llamada de prueba simple para validar la key
-      const testResponse = await sendToBackground({
-        action: 'createTaskExecution',
-        taskTypeId: 'test',
-        title: 'Prueba de API',
-        inputText: 'Test'
       });
       
       showMainView();
@@ -160,17 +176,20 @@ document.addEventListener('DOMContentLoaded', async function() {
         errorMessage = 'API Key inválida';
       } else if (error.message.includes('rate_limit')) {
         errorMessage = 'Límite de uso alcanzado, intenta más tarde';
+      } else if (error.message.includes('Origen no autorizado')) {
+        errorMessage = 'Error de seguridad: origen no autorizado';
       }
       
       showApiKeyError(errorMessage);
     } finally {
       saveBtn.disabled = false;
-      saveBtn.textContent = 'Guardar y Continuar';
+      saveBtn.textContent = 'Guardar';
     }
   }
   
   function showApiKeyError(message) {
-    apiKeyError.textContent = message;
+    const sanitizedMessage = sanitizeString(message, 200);
+    apiKeyError.textContent = sanitizedMessage;
     apiKeyError.classList.remove('ch-d-none');
   }
     
@@ -210,8 +229,11 @@ document.addEventListener('DOMContentLoaded', async function() {
           button.setAttribute('data-task-type-id', taskType.id);
           
           const icon = getTaskTypeIcon(taskType.name);
-          button.innerHTML = `${icon} ${taskType.name}`;
-          button.title = taskType.description || taskType.name;
+          const sanitizedName = sanitizeString(taskType.name, 100);
+          const sanitizedDescription = sanitizeString(taskType.description || taskType.name, 200);
+          
+          button.innerHTML = `${icon} ${sanitizedName}`;
+          button.title = sanitizedDescription;
           
           button.addEventListener('click', () => handleTaskTypeSelection(taskType));
           
@@ -220,15 +242,18 @@ document.addEventListener('DOMContentLoaded', async function() {
       
     } catch (error) {
       console.error('Error loading task types:', error);
+      const sanitizedError = sanitizeString(error.message, 100);
       taskTypeButtons.innerHTML = `
         <div class="ch-alert ch-alert-danger ch-text-center">
-          <small>Error al cargar tipos de tarea: ${error.message}</small>
+          <small>Error al cargar tipos de tarea: ${sanitizedError}</small>
         </div>
       `;
     }
   }
 
   function getTaskTypeIcon(taskName) {
+    if (!taskName || typeof taskName !== 'string') return '✨';
+    
     const iconMap = {
       'hilo': '🧵', 'twitter': '🧵', 'x': '🧵', 'thread': '🧵',
       'video': '🎬', 'guion': '🎬', 'guión': '🎬', 'script': '🎬',
@@ -263,6 +288,12 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
 
   async function handleTaskTypeSelection(taskType) {
+    // Validar que taskType es válido
+    if (!taskType || !taskType.id || !taskType.name) {
+      showStatus('Error: tipo de tarea no válido', 'error');
+      return;
+    }
+    
     chrome.tabs.query({active: true, currentWindow: true}, async function(tabs) {
       if (!tabs || !tabs[0]) {
         showStatus('No se pudo acceder a la pestaña activa', 'error');
@@ -270,6 +301,12 @@ document.addEventListener('DOMContentLoaded', async function() {
       }
       
       const currentTab = tabs[0];
+      
+      // Validar URL de la pestaña
+      if (!currentTab.url || (!currentTab.url.startsWith('http://') && !currentTab.url.startsWith('https://') && !currentTab.url.startsWith('file://'))) {
+        showStatus('No se puede procesar esta página. Usa páginas web normales.', 'error');
+        return;
+      }
       
       if (useSelectedTextCheckbox.checked) {
         try {
@@ -284,7 +321,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
       }
       
-      showStatus(`Procesando: ${taskType.name}...`, 'loading');
+      showStatus(`Procesando: ${sanitizeString(taskType.name, 50)}...`, 'loading');
       
       chrome.tabs.sendMessage(currentTab.id, {
         action: 'processWithBackend',
@@ -300,6 +337,8 @@ document.addEventListener('DOMContentLoaded', async function() {
           } else {
             showStatus('Error: no se pudo procesar la página', 'error');
           }
+        } else if (response && response.error) {
+          showStatus('Error: ' + sanitizeString(response.error, 100), 'error');
         } else {
           window.close();
         }
@@ -320,7 +359,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
   
   function showStatus(message, type = 'loading') {
-    statusElement.textContent = message;
+    const sanitizedMessage = sanitizeString(message, 200);
+    statusElement.textContent = sanitizedMessage;
     
     statusElement.className = 'ch-alert ch-text-center';
     
