@@ -2,7 +2,11 @@
 
 **Asistente con IA para periodistas y chequeadores**
 
-Esta versión local funciona conectándose directamente con la API de OpenAI. Incluye todas las funcionalidades principales del asistente, incluyendo gestión y personalización de tareas.
+Extensión de navegador desarrollado para organizaciones orientadas al periodismo y fact-checking que buscan acelerar su proceso de adopción de IA en redacciones y otras áreas. Cuenta con una serie de tareas precargadas, 100% personalizables y la posibilidad de agregar nuevas tareas de forma rápida y sencilla. 
+
+Para ver más prompts (disponibles en español, portugués e inglés), se puede acceder a la [base regional de prompts](https://github.com/chequeado/asistente-ia-plugin/wiki). Esta versión local funciona conectándose directamente con la API de OpenAI. Incluye todas las funcionalidades principales del asistente, incluyendo gestión y personalización de tareas. Requiere una clave de API de OpenAI para ejecutar las tareas de IA. 
+
+Esta extensión fue desarrollada en el marco del proyecto de JournalismAI Innovation Challenge, "Empoderando redacciones pequeñas con Inteligencia Artificial", de [Chequeado](https://chequeado.com), y cuenta con la colaboración de [La Silla Vacía](https://lasillavacia.com) (Colombia), [Projecto Comprova](https://projetocomprova.com.br/) (Brasil) y [Factchequeado](https://factchequeado.com) (Estados Unidos).
 
 ## 🌟 Características
 
@@ -10,7 +14,6 @@ Esta versión local funciona conectándose directamente con la API de OpenAI. In
 - ✅ **Importar/Exportar configuraciones** - Comparte tareas entre dispositivos
 - ✅ **Soporte para archivos adjuntos** - PDFs, documentos, etc.
 - ✅ **Refinamiento de resultados** - Mejora las respuestas iterativamente
-- ✅ **Interfaz drag & drop** - Experiencia de usuario mejorada
 
 ## 🚀 Instalación
 
@@ -77,34 +80,12 @@ Formato:
 - **Importar**: Carga tareas desde un archivo JSON
 - **Restablecer**: Vuelve a las tareas por defecto
 
-## 💡 Tipos de tarea incluidos
-
-### Por defecto incluye:
-- **📝 Hacer bullets**: Resumen en 3 puntos del contenido
-- **🧵 Escribir hilo**: Hilo de Twitter/X del artículo
-- **🚫 Generar desmentido**: Borrador de fact-checking
-- **📰 Generar titular**: 3 opciones de titulares alternativos
-- **🎬 Guión para video**: Script para video explicativo
-
-### Personalización completa:
-- Crea tus propias tareas
-- Configura prompts específicos para tu flujo de trabajo
-- Importa tareas de otros usuarios o equipos
-
 ## 🔐 Privacidad y Seguridad
 
 - **API Key local**: Tu clave se almacena solo en tu navegador
 - **Sin servidores intermediarios**: Conexión directa con OpenAI
 - **Datos temporales**: Las ejecuciones se almacenan solo en memoria
-- **Sin tracking**: No recopilamos datos de uso
-
-## 💰 Costos
-
-Esta versión usa tu cuenta de OpenAI directamente:
-- **Control total** sobre el gasto
-- **Tarifas transparentes** según el modelo usado
-- **Sin suscripciones** adicionales
-- **Pay-per-use** - pagas solo lo que usas
+- **Sin tracking**: No se recopilan datos de uso
 
 ### Estimación de costos (GPT-5):
 - Artículo corto (1000 palabras): ~$0.010 por pedido
