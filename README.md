@@ -26,7 +26,7 @@ cd asistente-ia-plugin
 ### 2. Instalar la extensión
 1. Abre Chrome y navega a `chrome://extensions/`
 2. Activa el "Modo desarrollador" en la esquina superior derecha
-3. Haz clic en "Cargar descomprimida" y selecciona la carpeta `prototype`
+3. Haz clic en "Cargar descomprimida" y selecciona la carpeta `extension`
 4. La extensión "Asistente IA" aparecerá en tu lista
 
 ### 3. Configurar OpenAI API Key
