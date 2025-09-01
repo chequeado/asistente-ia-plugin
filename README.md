@@ -22,7 +22,7 @@ Esta extensión fue desarrollada en el marco del proyecto de JournalismAI Innova
 
 ### 1. Descargar el código
 ```bash
-git clone [tu-repositorio]
+git clone https://github.com/chequeado/asistente-ia-plugin.git
 cd asistente-ia-plugin
 ```
 
