@@ -8,7 +8,8 @@ Para ver más prompts (disponibles en español, portugués e inglés), se puede 
 
 Esta extensión fue desarrollada en el marco del proyecto de JournalismAI Innovation Challenge, "Empoderando redacciones pequeñas con Inteligencia Artificial", de [Chequeado](https://chequeado.com), y cuenta con la colaboración de [La Silla Vacía](https://lasillavacia.com) (Colombia), [Projecto Comprova](https://projetocomprova.com.br/) (Brasil) y [Factchequeado](https://factchequeado.com) (Estados Unidos).
 
-<img width="1600" height="819" alt="asistenteia" src="https://github.com/user-attachments/assets/dce056cb-8e19-45c1-affd-629566a15975" />
+<img width="742" height="637" alt="Captura de pantalla de 2025-09-01 18-36-55" src="https://github.com/user-attachments/assets/5d2c9e0c-7cd2-477e-8697-3d244f77f5d4" />
+
 
 ## 🌟 Características
 
