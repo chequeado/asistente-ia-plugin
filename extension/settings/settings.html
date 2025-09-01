@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuración - Asistente IA</title>
+  <link rel="stylesheet" href="../styles/chequeabot-framework.css">
+  <link rel="stylesheet" href="settings.css">
+</head>
+
+<body>
+  <div class="ch-container ch-py-4">
+    <div class="ch-card">
+      <!-- Header -->
+      <div class="ch-card-header">
+        <h1 class="ch-m-0">Configuración del Asistente IA</h1>
+      </div>
+      
+      <div class="ch-card-body">
+        <!-- API Key Section -->
+        <div class="ch-mb-4">
+          <div class="ch-card ch-bg-light">
+            <div class="ch-card-body">
+              <h4 class="ch-mb-3">🔑 Configuración de OpenAI API</h4>
+              
+              <div id="apiKeyStatus" class="ch-mb-3">
+                <!-- Status will be populated by JavaScript -->
+              </div>
+              
+              <div class="ch-form-group">
+                <label class="ch-form-label" for="newApiKey">Clave API de OpenAI</label>
+                <div class="ch-password-input-container">
+                  <input type="password" id="newApiKey" class="ch-form-control" placeholder="sk-...">
+                </div>
+                <small class="ch-text-muted">
+                  Deja vacío para mantener la clave actual. 
+                  <a href="#" id="openAIKeysLink">Obtener API Key</a>
+                </small>
+              </div>
+              
+              <div class="ch-d-flex ch-gap-2">
+                <button id="updateApiKeyBtn" class="ch-btn ch-btn-primary">
+                  Actualizar API Key
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Task Management Section -->
+        <div class="ch-mb-4">
+          <div class="ch-d-flex ch-justify-content-between ch-align-items-center ch-mb-3">
+            <h4 class="ch-m-0">📋 Gestión de Tareas</h4>
+            <div class="ch-d-flex ch-gap-2">
+              <button id="exportTasksBtn" class="ch-btn ch-btn-sm ch-btn-outline-primary">
+                📤 Exportar
+              </button>
+              <button id="importTasksBtn" class="ch-btn ch-btn-sm ch-btn-outline-primary">
+                📥 Importar
+              </button>
+              <button id="resetTasksBtn" class="ch-btn ch-btn-sm ch-btn-outline-danger">
+                🔄 Restablecer
+              </button>
+            </div>
+          </div>
+          
+          <input type="file" id="importFile" accept=".json" style="display: none;">
+        </div>
+
+        <!-- Task Type Selector -->
+        <div class="ch-mb-4">
+          <label class="ch-form-label">Seleccionar Tarea</label>
+          <div class="ch-d-flex ch-gap-2">
+            <select id="taskTypeSelect" class="ch-form-control ch-flex-grow-1">
+              <option value="">Selecciona una tarea para editar...</option>
+            </select>
+            <button id="createNewTaskBtn" class="ch-btn ch-btn-primary">
+              + Nueva Tarea
+            </button>
+          </div>
+          <small class="ch-text-muted">
+            Crea y edita tareas personalizadas para el asistente IA
+          </small>
+        </div>
+        
+        <!-- Task Editor Section -->
+        <div id="taskEditorSection" style="display: none;">
+          <!-- El contenido se genera dinámicamente por JavaScript -->
+        </div>
+
+        <!-- Status Messages -->
+        <div id="statusMessage" class="ch-alert ch-mt-3" style="display: none;"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>

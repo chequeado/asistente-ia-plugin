@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asistente IA</title>
+  <link rel="stylesheet" href="../styles/chequeabot-framework.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body class="ch-extension ch-popup-container">
+  <!-- Loading View -->
+  <div id="loadingView" class="ch-card">
+    <div class="ch-card-body ch-text-center ch-p-4">
+      <div class="ch-spinner ch-text-primary ch-mb-2"></div>
+      <p class="ch-m-0">Cargando...</p>
+    </div>
+  </div>
+
+  <!-- API Key Setup View -->
+  <div id="apiKeyView" class="ch-card" style="display: none;">
+    <div class="ch-card-header">
+      <h3 class="ch-m-0">🔑 Configurar OpenAI API</h3>
+    </div>
+    <div class="ch-card-body">
+      <form id="apiKeyForm">
+        <div class="ch-form-group">
+          <label class="ch-form-label" for="apiKey">Clave API de OpenAI</label>
+          <div class="ch-password-input-container">
+            <input type="password" id="apiKey" class="ch-form-control" placeholder="sk-..." required>
+          </div>
+          <small class="ch-text-muted">
+            Tu clave API se almacena localmente y nunca se comparte.
+          </small>
+        </div>
+        
+        <button type="submit" id="saveApiKeyBtn" class="ch-btn ch-btn-primary ch-btn-block">
+          Guardar
+        </button>
+        
+        <div id="apiKeyError" class="ch-alert ch-alert-danger ch-mt-2 ch-d-none"></div>
+        
+        <!-- Links de ayuda -->
+        <div class="ch-text-center ch-mt-3">
+          <div class="ch-mb-2">
+            <a href="#" id="openAIDocsLink" class="ch-text-decoration-none ch-text-primary" style="font-size: 0.9rem;">
+              ¿Cómo obtener tu API Key?
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main View -->
+  <div id="mainView" class="ch-card" style="display: none;">
+    <div class="ch-card-header">
+      <div class="ch-d-flex ch-justify-content-between ch-align-items-center">
+        <h3 class="ch-m-0">Asistente IA</h3>  
+        <div class="ch-d-flex ch-gap-2 ml-auto">
+          <button href="#" id="openSettings" class="ch-btn ch-btn-outline-primary ch-btn-sm">
+            Configuración
+          </button>
+        </div>     
+      </div>
+    </div>
+
+    <div class="ch-card-body">
+      <!-- API Status -->
+      <div id="apiStatusContainer" class="ch-mb-3">
+        <div class="ch-d-flex ch-justify-content-between ch-align-items-center ch-p-2 ch-bg-light" 
+             style="border-radius: var(--ch-border-radius-sm);">
+          <small class="ch-text-muted">
+            <span id="apiStatusIcon">🟢</span> <span id="apiStatusText">API Key configurada</span>
+          </small>
+          <small class="ch-text-muted" id="modelInfo">gpt-5</small>
+        </div>
+      </div>
+
+      <!-- Task type buttons -->
+      <div id="taskTypeButtons" class="ch-mb-3">
+        <!-- Buttons populated dynamically -->
+      </div>
+
+      <!-- Status message -->
+      <div id="status" class="ch-alert ch-d-none"></div>
+
+      <!-- Loading message -->
+      <div id="loadingMsg" class="ch-text-center ch-p-2">
+        <div class="ch-spinner ch-spinner-sm ch-text-primary"></div>
+        <small class="ch-text-muted ch-ml-2">Cargando tipos de tarea...</small>
+      </div>
+
+      <!-- Text Selection Option -->
+      <div class="ch-mb-3 ch-p-3 ch-bg-light" style="border-radius: var(--ch-border-radius-sm); border: 1px solid var(--ch-border-color);">
+        <div class="ch-form-check ch-mb-2">
+          <input type="checkbox" class="ch-form-check-input" id="useSelectedText" checked>
+          <label class="ch-form-check-label" for="useSelectedText">
+            <strong>Usar solo texto seleccionado</strong>
+          </label>
+        </div>
+        <small id="textModeHelp" class="ch-text-muted ch-text-sm ch-d-block">
+          <span id="helpIcon">✓</span> <span id="helpText">Procesará únicamente el texto que hayas seleccionado en la página</span>
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

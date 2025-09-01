@@ -1,0 +1,683 @@
+/* ==============================================
+   CHEQUEABOT EXTENSION CSS FRAMEWORK
+   Un micro-framework optimizado para extensiones
+   ============================================== */
+
+/* 0. IMPORTAR FUENTE ARCHIVO */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap');
+
+/* 1. RESET Y VARIABLES */
+:root {
+  /* Colores principales */
+  --ch-primary: #354052;
+  --ch-primary-hover: #FFF;
+  --ch-secondary: #6c757d;
+  --ch-success: #188865;
+  --ch-danger: #dc3545;
+  --ch-warning: #ffc107;
+  --ch-info: #0dcaf0;
+  --ch-light: #f5f5f5;
+  --ch-dark: #212529;
+  --ch-white: #ffffff;
+  
+  /* Colores de texto */
+  --ch-text-primary: #354052;
+  --ch-text-secondary: #6c757d;
+  --ch-text-hover: #FFF;
+  --ch-text-muted: #6c757d;
+  
+  /* Bordes */
+  --ch-border-color: #dee2e6;
+  --ch-border-radius: 0.375rem;
+  --ch-border-radius-sm: 0.25rem;
+  --ch-border-radius-lg: 0.5rem;
+  
+  /* Sombras */
+  --ch-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --ch-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --ch-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  
+  /* Spacing */
+  --ch-spacing-1: 0.25rem;
+  --ch-spacing-2: 0.5rem;
+  --ch-spacing-3: 1rem;
+  --ch-spacing-4: 1.5rem;
+  --ch-spacing-5: 3rem;
+  
+  /* Fuentes */
+  --ch-font-family: 'Archivo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ch-font-size-sm: 0.875rem;
+  --ch-font-size-base: 1rem;
+  --ch-font-size-lg: 1.125rem;
+  --ch-font-size-xl: 1.25rem;
+  
+  /* Transiciones */
+  --ch-transition: all 0.2s ease-in-out;
+}
+
+/* 2. RESET BÁSICO PARA EXTENSIONES */
+.ch-extension {
+  box-sizing: border-box;
+  font-family: var(--ch-font-family);
+  font-size: var(--ch-font-size-base);
+  line-height: 1.5;
+  color: var(--ch-text-primary);
+}
+
+.ch-extension *,
+.ch-extension *::before,
+.ch-extension *::after {
+  box-sizing: inherit;
+}
+
+/* 3. CONTENEDORES */
+.ch-container {
+  width: 100%;
+  padding-right: var(--ch-spacing-3);
+  padding-left: var(--ch-spacing-3);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ch-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: var(--ch-white);
+  background-clip: border-box;
+  border: 1px solid var(--ch-border-color);
+  border-radius: var(--ch-border-radius);
+  box-shadow: var(--ch-shadow-sm);
+}
+
+.ch-card-header {
+  padding: var(--ch-spacing-2);
+  margin-bottom: 0;
+  background-color: var(--ch-primary);
+  color: var(--ch-white);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: var(--ch-border-radius) var(--ch-border-radius) 0 0;
+  font-weight: 500; /* Peso medio para headers */
+}
+
+.ch-card-header h1,
+.ch-card-header h2,
+.ch-card-header h3,
+.ch-card-header h4,
+.ch-card-header h5,
+.ch-card-header h6 {
+  font-weight: 600; /* Peso semibold para títulos en headers */
+  margin: 0;
+  color: var(--ch-white);
+}
+
+.ch-card-body {
+  flex: 1 1 auto;
+  padding: var(--ch-spacing-3);
+}
+
+/* 4. BOTONES */
+.ch-btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: var(--ch-spacing-2) var(--ch-spacing-3);
+  font-size: var(--ch-font-size-base);
+  line-height: 1.5;
+  border-radius: var(--ch-border-radius-sm);
+  transition: var(--ch-transition);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.ch-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--ch-shadow-sm);
+}
+
+.ch-btn:active {
+  transform: translateY(0);
+}
+
+.ch-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Variantes de botones */
+.ch-btn-primary {
+  color: var(--ch-text-hover);
+  background-color: var(--ch-primary);
+  border-color: var(--ch-primary);
+}
+
+.ch-btn-primary:hover {
+  background-color: var(--ch-primary-hover);
+  border-color: var(--ch-primary);
+  color: var(--ch-text-primaryr);
+}
+
+.ch-btn-secondary {
+  color: var(--ch-white);
+  background-color: var(--ch-secondary);
+  border-color: var(--ch-secondary);
+}
+
+.ch-btn-outline-primary {
+  color: var(--ch-primary);
+  background-color: var(--ch-white);
+  border-color: var(--ch-primary);
+}
+
+.ch-btn-outline-primary:hover {
+  color: var(--ch-white);
+  background-color: var(--ch-primary);
+  border-color: var(--ch-white);
+}
+
+/* Tamaños de botones */
+.ch-btn-sm {
+  padding: var(--ch-spacing-1) var(--ch-spacing-2);
+  font-size: var(--ch-font-size-sm);
+}
+
+.ch-btn-lg {
+  padding: var(--ch-spacing-2) var(--ch-spacing-4);
+  font-size: var(--ch-font-size-lg);
+}
+
+.ch-btn-block {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+/* 5. FORMULARIOS */
+.ch-form-group {
+  margin-bottom: var(--ch-spacing-3);
+}
+
+.ch-form-label {
+  display: inline-block;
+  margin-bottom: var(--ch-spacing-2);
+  font-weight: 500;
+  color: var(--ch-text-primary);
+}
+
+.ch-form-control {
+  display: block;
+  width: 100%;
+  padding: var(--ch-spacing-2) var(--ch-spacing-3);
+  font-size: var(--ch-font-size-sm);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ch-text-primary);
+  background-color: var(--ch-white);
+  background-clip: padding-box;
+  border: 1px solid var(--ch-border-color);
+  border-radius: var(--ch-border-radius-sm);
+  transition: var(--ch-transition);
+  font-family: inherit;
+}
+
+.ch-form-control:focus {
+  color: var(--ch-text-primary);
+  background-color: var(--ch-white);
+  border-color: var(--ch-primary);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.ch-form-control:disabled {
+  background-color: var(--ch-light);
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+/* 6. ALERTAS */
+.ch-alert {
+  position: relative;
+  padding: var(--ch-spacing-3);
+  margin-bottom: var(--ch-spacing-3);
+  border: 1px solid transparent;
+  border-radius: var(--ch-border-radius-sm);
+}
+
+.ch-alert-success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+}
+
+.ch-alert-danger {
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.ch-alert-info {
+  color: #055160;
+  background-color: #cff4fc;
+  border-color: #b6effb;
+}
+
+/* 7. UTILIDADES DE ESPACIADO */
+.ch-m-0 { margin: 0 !important; }
+.ch-m-1 { margin: var(--ch-spacing-1) !important; }
+.ch-m-2 { margin: var(--ch-spacing-2) !important; }
+.ch-m-3 { margin: var(--ch-spacing-3) !important; }
+.ch-m-4 { margin: var(--ch-spacing-4) !important; }
+.ch-m-5 { margin: var(--ch-spacing-5) !important; }
+
+.ch-mt-0 { margin-top: 0 !important; }
+.ch-mt-1 { margin-top: var(--ch-spacing-1) !important; }
+.ch-mt-2 { margin-top: var(--ch-spacing-2) !important; }
+.ch-mt-3 { margin-top: var(--ch-spacing-3) !important; }
+.ch-mt-4 { margin-top: var(--ch-spacing-4) !important; }
+.ch-mt-5 { margin-top: var(--ch-spacing-5) !important; }
+
+.ch-mb-0 { margin-bottom: 0 !important; }
+.ch-mb-1 { margin-bottom: var(--ch-spacing-1) !important; }
+.ch-mb-2 { margin-bottom: var(--ch-spacing-2) !important; }
+.ch-mb-3 { margin-bottom: var(--ch-spacing-3) !important; }
+.ch-mb-4 { margin-bottom: var(--ch-spacing-4) !important; }
+.ch-mb-5 { margin-bottom: var(--ch-spacing-5) !important; }
+
+.ch-p-0 { padding: 0 !important; }
+.ch-p-1 { padding: var(--ch-spacing-1) !important; }
+.ch-p-2 { padding: var(--ch-spacing-2) !important; }
+.ch-p-3 { padding: var(--ch-spacing-3) !important; }
+.ch-p-4 { padding: var(--ch-spacing-4) !important; }
+.ch-p-5 { padding: var(--ch-spacing-5) !important; }
+
+/* 8. UTILIDADES DE DISPLAY */
+.ch-d-none { display: none !important; }
+.ch-d-block { display: block !important; }
+.ch-d-inline-block { display: inline-block !important; }
+.ch-d-flex { display: flex !important; }
+.ch-d-inline-flex { display: inline-flex !important; }
+
+/* Flexbox */
+.ch-flex-row { flex-direction: row !important; }
+.ch-flex-column { flex-direction: column !important; }
+.ch-justify-content-start { justify-content: flex-start !important; }
+.ch-justify-content-end { justify-content: flex-end !important; }
+.ch-justify-content-center { justify-content: center !important; }
+.ch-justify-content-between { justify-content: space-between !important; }
+.ch-align-items-start { align-items: flex-start !important; }
+.ch-align-items-end { align-items: flex-end !important; }
+.ch-align-items-center { align-items: center !important; }
+.ch-flex-grow-1 { flex-grow: 1 !important; }
+.ch-gap-1 { gap: var(--ch-spacing-1) !important; }
+.ch-gap-2 { gap: var(--ch-spacing-2) !important; }
+.ch-gap-3 { gap: var(--ch-spacing-3) !important; }
+
+/* 9. UTILIDADES DE TEXTO */
+.ch-text-left { text-align: left !important; }
+.ch-text-right { text-align: right !important; }
+.ch-text-center { text-align: center !important; }
+.ch-text-primary { color: var(--ch-text-primary) !important; }
+.ch-text-secondary { color: var(--ch-text-secondary) !important; }
+.ch-text-muted { color: var(--ch-text-muted) !important; }
+.ch-text-white { color: var(--ch-white) !important; }
+.ch-text-success { color: var(--ch-success) !important; }
+.ch-text-danger { color: var(--ch-danger) !important; }
+.ch-font-weight-normal { font-weight: 400 !important; }
+.ch-font-weight-medium { font-weight: 500 !important; }
+.ch-font-weight-semibold { font-weight: 600 !important; }
+.ch-font-weight-bold { font-weight: 700 !important; }
+.ch-text-sm { font-size: var(--ch-font-size-sm) !important; }
+.ch-text-md { font-size: var(--ch-font-size-md) !important; }
+.ch-text-base { font-size: var(--ch-font-size-base) !important; }
+.ch-text-decoration-none { text-decoration: none !important; }
+
+/* 10. UTILIDADES DE FONDO */
+.ch-bg-primary { background-color: var(--ch-primary) !important; }
+.ch-bg-secondary { background-color: var(--ch-secondary) !important; }
+.ch-bg-success { background-color: var(--ch-success) !important; }
+.ch-bg-danger { background-color: var(--ch-danger) !important; }
+.ch-bg-light { background-color: var(--ch-light) !important; }
+.ch-bg-white { background-color: var(--ch-white) !important; }
+
+/* 11. BADGES */
+.ch-badge {
+  display: inline-block;
+  padding: var(--ch-spacing-1) var(--ch-spacing-2);
+  font-size: var(--ch-font-size-sm);
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: var(--ch-border-radius-sm);
+}
+
+.ch-badge-primary {
+  color: var(--ch-white);
+  background-color: var(--ch-primary);
+}
+
+.ch-badge-secondary {
+  color: var(--ch-white);
+  background-color: var(--ch-secondary);
+}
+
+/* 12. SPINNERS */
+.ch-spinner {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: text-bottom;
+  border: 0.25em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: ch-spinner-border 0.75s linear infinite;
+}
+
+.ch-spinner-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.2em;
+}
+
+@keyframes ch-spinner-border {
+  to { transform: rotate(360deg); }
+}
+
+/* 13. LISTAS */
+.ch-list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+.ch-list-group {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-radius: var(--ch-border-radius);
+}
+
+.ch-list-group-item {
+  position: relative;
+  display: block;
+  padding: var(--ch-spacing-2) var(--ch-spacing-3);
+  color: var(--ch-text-primary);
+  text-decoration: none;
+  background-color: var(--ch-white);
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.ch-list-group-item:first-child {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.ch-list-group-item:last-child {
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+.ch-list-group-item + .ch-list-group-item {
+  border-top-width: 0;
+}
+
+.ch-list-group-item:hover {
+  background-color: var(--ch-light);
+}
+
+/* 14. COMPONENTES ESPECIALES PARA EXTENSIONES */
+
+/* Popup container */
+.ch-popup-container {
+  min-width: 350px;
+  max-width: 400px;
+  background-color: var(--ch-light);
+  margin: 0;
+}
+
+/* Content script overlay */
+.ch-overlay {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background-color: var(--ch-white);
+  border-radius: var(--ch-border-radius);
+  box-shadow: var(--ch-shadow-lg);
+  z-index: 9999;
+}
+
+/* Draggable header */
+.ch-draggable {
+  cursor: move;
+}
+
+
+/* Progress bar para uso de IA */
+.ch-progress {
+  display: flex;
+  height: 0.5rem;
+  overflow: hidden;
+  font-size: var(--ch-font-size-sm);
+  background-color: #c9c9c9;
+  border-radius: var(--ch-border-radius-sm);
+}
+
+.ch-progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--ch-white);
+  text-align: center;
+  white-space: nowrap;
+  background-color: var(--ch-primary);
+  transition: width 0.6s ease;
+}
+
+/* 15. ANIMACIONES */
+.ch-fade-in {
+  animation: ch-fadeIn 0.3s ease-in;
+}
+
+@keyframes ch-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ch-slide-up {
+  animation: ch-slideUp 0.3s ease-out;
+}
+
+@keyframes ch-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 16. UTILIDADES PARA ALTA ESPECIFICIDAD (Content Scripts) */
+.ch-important {
+  /* Usar cuando necesites override estilos de la página host */
+}
+
+.ch-important .ch-btn {
+  all: initial;
+  /* Luego aplicar tus estilos */
+  display: inline-block !important;
+  font-family: var(--ch-font-family) !important;
+  /* etc... */
+}
+
+/* 17. MODO OSCURO (opcional) */
+@media (prefers-color-scheme: dark) {
+  .ch-extension.ch-dark-mode {
+    --ch-text-primary: #f8f9fa;
+    --ch-text-secondary: #adb5bd;
+    --ch-bg-primary: #212529;
+    --ch-border-color: #495057;
+  }
+  
+  .ch-dark-mode .ch-card {
+    background-color: #343a40;
+    color: var(--ch-text-primary);
+  }
+  
+  .ch-dark-mode .ch-form-control {
+    background-color: #495057;
+    border-color: #6c757d;
+    color: var(--ch-text-primary);
+  }
+}
+
+/* ESTILOS PARA CONTENIDO HTML RENDERIZADO */
+/* Agregar esto al final de chequeabot-framework.css */
+
+.ch-result-content .ch-text-base{
+  color: white;
+}
+
+.ch-result-content {
+  line-height: 1.6;
+  color: var(--ch-text-primary);
+}
+
+.ch-result-content h1,
+.ch-result-content h2,
+.ch-result-content h3,
+.ch-result-content h4,
+.ch-result-content h5,
+.ch-result-content h6 {
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+  color: var(--ch-text-primary);
+}
+
+.ch-result-content h1 { font-size: 2rem; }
+.ch-result-content h2 { font-size: 1.75rem; }
+.ch-result-content h3 { font-size: 1.5rem; }
+.ch-result-content h4 { font-size: 1.25rem; }
+.ch-result-content h5 { font-size: 1.125rem; }
+.ch-result-content h6 { font-size: 1rem; }
+
+.ch-result-content p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.ch-result-content ul,
+.ch-result-content ol {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+  list-style-position: outside;
+}
+
+.ch-result-content ul {
+  list-style-type: disc;
+}
+
+.ch-result-content ul ul {
+  list-style-type: circle;
+}
+
+.ch-result-content ul ul ul {
+  list-style-type: square;
+}
+
+.ch-result-content ol {
+  list-style-type: decimal;
+}
+
+.ch-result-content li {
+  margin-bottom: 0.25rem;
+  display: list-item;
+}
+
+.ch-result-content strong {
+  font-weight: 600;
+}
+
+.ch-result-content em {
+  font-style: italic;
+}
+
+.ch-result-content blockquote {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid var(--ch-primary);
+  background-color: var(--ch-light);
+  font-style: italic;
+}
+
+.ch-result-content a {
+  color: var(--ch-primary);
+  text-decoration: underline;
+}
+
+.ch-result-content a:hover {
+  color: var(--ch-primary-hover);
+  text-decoration: none;
+}
+
+.ch-result-content hr {
+  margin: 1.5rem 0;
+  border: 0;
+  border-top: 1px solid var(--ch-border-color);
+}
+
+.ch-result-content table {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+}
+
+.ch-result-content th,
+.ch-result-content td {
+  padding: 0.5rem;
+  border: 1px solid var(--ch-border-color);
+  text-align: left;
+}
+
+.ch-result-content th {
+  background-color: var(--ch-light);
+  font-weight: 600;
+}
+
+.ch-result-content code {
+  padding: 0.125rem 0.25rem;
+  background-color: var(--ch-light);
+  border-radius: 3px;
+  font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+  font-size: 0.875em;
+}
+
+.ch-result-content pre {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--ch-light);
+  border-radius: var(--ch-border-radius-sm);
+  overflow-x: auto;
+}
+
+.ch-result-content pre code {
+  padding: 0;
+  background-color: transparent;
+}

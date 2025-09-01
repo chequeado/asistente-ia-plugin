@@ -1,0 +1,72 @@
+/* settings.css - Estilos mínimos para el editor de prompts */
+
+/* Ajuste del contenedor principal */
+body {
+  background-color: var(--ch-light);
+  min-height: 100vh;
+}
+
+.ch-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Textareas del editor */
+#mainPrompt, #systemPrompt {
+  font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#mainPrompt {
+  min-height: 200px;
+}
+
+#systemPrompt {
+  min-height: 100px;
+}
+
+/* Panel de variables */
+#variablesList code {
+  background-color: rgba(13, 110, 253, 0.1);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 13px;
+  user-select: all;
+  cursor: pointer;
+}
+
+#variablesList code:hover {
+  background-color: rgba(13, 110, 253, 0.2);
+}
+
+/* Estados del selector de tareas */
+#taskTypeSelect:disabled {
+  cursor: wait;
+}
+
+/* Animación de carga suave */
+#promptEditorSection {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Ajuste para mensajes de estado */
+#statusMessage {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .ch-container {
+    padding-left: var(--ch-spacing-2);
+    padding-right: var(--ch-spacing-2);
+  }
+  
+  #mainPrompt {
+    min-height: 150px;
+  }
+}

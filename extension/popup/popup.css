@@ -1,0 +1,166 @@
+/* popup/popup.css - Con estilos para password toggle y mejoras */
+
+/* ======== NUEVOS ESTILOS PARA PASSWORD TOGGLE ======== */
+
+/* Contenedor del input de contraseña */
+.ch-password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ch-password-input-container input {
+  padding-right: 3rem !important;
+  width: 100%;
+}
+
+/* Botón toggle de contraseña */
+.ch-password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  border-radius: 3px;
+}
+
+.ch-password-toggle:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.ch-password-toggle:focus {
+  outline: 2px solid var(--ch-primary);
+  outline-offset: 2px;
+}
+
+.ch-password-toggle span {
+  font-size: 16px;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ======== ESTILOS EXISTENTES MEJORADOS ======== */
+
+/* Sobrescribir estilos del framework cuando sea necesario */
+.ch-task-btn {
+  margin-bottom: 10px;
+}
+
+/* Animación personalizada para el spinner en el popup */
+.ch-spinner {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Ajustes específicos para el formulario de login */
+#loginForm {
+  padding: 0 20px;
+}
+
+/* Estado de los mensajes */
+#status.show {
+  display: block !important;
+}
+
+#status.success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border-color: #badbcc;
+}
+
+#status.error {
+  background-color: #f8d7da;
+  color: #842029;
+  border-color: #f5c2c7;
+}
+
+#status.loading {
+  background-color: #cff4fc;
+  color: #055160;
+  border-color: #b6effb;
+}
+
+/* Personalización de la barra de progreso según el porcentaje */
+#usageProgressBar.danger {
+  background-color: var(--ch-danger);
+}
+
+#usageProgressBar.warning {
+  background-color: var(--ch-warning);
+}
+
+/* Transiciones suaves */
+#usageProgressBar {
+  transition: width 0.6s ease, background-color 0.3s ease;
+}
+
+/* Animación de pulso para alertas */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 193, 7, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+  }
+}
+
+/* Mejorar estilo del checkbox */
+.ch-form-check-input {
+  width: 1.2em;
+  height: 1.2em;
+  margin-top: 0.25em;
+  vertical-align: top;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 2px solid var(--ch-primary);
+  appearance: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  border-radius: 3px;
+}
+
+.ch-form-check-input:checked {
+  background-color: var(--ch-primary);
+  border-color: var(--ch-primary);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+}
+
+.ch-form-check-input:focus {
+  border-color: var(--ch-primary);
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(53, 64, 82, 0.25);
+}
+
+.ch-form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.ch-form-check-label {
+  cursor: pointer;
+  user-select: none;
+  font-size: var(--ch-font-size-sm);
+}
+
+/* Mejorar alerta de warning */
+.ch-alert-warning {
+  color: #664d03;
+  background-color: #fff3cd;
+  border-color: #ffecb5;
+}

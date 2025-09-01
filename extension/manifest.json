@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Asistente IA",
+  "version": "2.0.0",
+  "description": "Asistente con IA para periodistas y verificadores de hechos - Versión independiente con OpenAI",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*",
+    "https://api.openai.com/*"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "css": ["styles/chequeabot-framework.css"],
+      "js": ["content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_page": "settings/settings.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["tasks/tasks.json"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
