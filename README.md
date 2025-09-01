@@ -1,25 +1,26 @@
-# Asistente IA 
+# ✨ Asistente IA 
+## **Empoderando redacciones con Inteligencia Artificial**
 
-**Asistente con IA para periodistas y chequeadores**
+Esta extensión de navegador **automatiza tareas clave de redacciones periodísticas utilizando Inteligencia Artificial**, con un foco adicional en fact-checking. 
 
-Extensión de navegador desarrollado para organizaciones orientadas al periodismo y fact-checking que resuelve tareas clave del trabajo diario de periodistas de forma automática utilizando Inteligencia Artificial. Está especialmente diseñado para organizaciones que buscan acelerar su proceso de adopción de IA en redacciones y otras áreas. Cuenta con una serie de tareas precargadas, 100% personalizables y la posibilidad de agregar nuevas tareas de forma rápida y sencilla. 
+Para ver todas las prompts (disponibles en español, portugués e inglés), se puede acceder a la [base regional de prompts](https://github.com/chequeado/asistente-ia-plugin/wiki).
+ 
+<img width="600" height="444" alt="Captura de pantalla de 2025-09-01 18-39-12" src="https://github.com/user-attachments/assets/f3dc89b6-8088-4b10-8428-c56df9c7684f" style="border: 2px solid gray; border-radius: 5px;" />
 
-Para ver más prompts (disponibles en español, portugués e inglés), se puede acceder a la [base regional de prompts](https://github.com/chequeado/asistente-ia-plugin/wiki). Esta versión local funciona conectándose directamente con la API de OpenAI. Incluye todas las funcionalidades principales del asistente, incluyendo gestión y personalización de tareas. Requiere una clave de API de OpenAI para ejecutar las tareas de IA. 
+## Contexto
 
 Esta extensión fue desarrollada en el marco del proyecto de JournalismAI Innovation Challenge *"Empoderando redacciones pequeñas con Inteligencia Artificial"*, de [Chequeado](https://chequeado.com)
 
 Agradecemos el aporte de [La Silla Vacía](https://lasillavacia.com) (Colombia), [Projecto Comprova](https://projetocomprova.com.br/) (Brasil) y [Factchequeado](https://factchequeado.com) (Estados Unidos) como usuarios de prueba que aportaron valioso feedback para el desarrollo de este proyecto y también por las instrucciones que aportaron a la base regional. 
  
-<img width="600" height="444" alt="Captura de pantalla de 2025-09-01 18-39-12" src="https://github.com/user-attachments/assets/f3dc89b6-8088-4b10-8428-c56df9c7684f" style="border: 2px solid gray; border-radius: 5px;" />
-
-
 ## 🌟 Características
 
-- ✅ **Gestión local de tareas** - Crea, edita y personaliza tareas
-- ✅ **Importar/Exportar configuraciones** - Comparte tareas entre dispositivos
-- ✅ **Soporte para archivos adjuntos** - PDFs, documentos, etc.
-- ✅ **Refinamiento de resultados** - Mejora las respuestas iterativamente
-
+- ✅ Diseñada para organizaciones que buscan acelerar su proceso de adopción de IA en redacciones y otras áreas. 
+- ✅ Cuenta con una serie de tareas precargadas completamente personalizables.
+- ✅ Permite agregar nuevas tareas de forma rápida y sencilla.
+- ✅ Permite compartir tareas con dos clics (para compartir de forma automática ver <chequeabot.com>)
+- ✅ Solo requiere una clave de API de OpenAI para habilitar el uso de IA (listo tambien en <chequeabot.com>)
+ 
 ## 🚀 Instalación
 
 ### 1. Descargar el código
