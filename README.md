@@ -1,7 +1,7 @@
 # ✨ Asistente IA 
 ## **Empoderando redacciones con Inteligencia Artificial**
 
-Esta extensión de navegador **automatiza tareas clave de redacciones periodísticas utilizando Inteligencia Artificial**, con un foco especial en periodismo de datos, fact-checking y el combate con la desinformación. 
+Esta extensión de navegador **automatiza tareas clave de redacciones periodísticas utilizando Inteligencia Artificial**, con un foco especial en periodismo de datos, fact-checking y el combate contra la desinformación. 
 
 Todas las prompts precargadas en esta aplicación y más se encuentran en la [base regional de prompts](https://github.com/chequeado/asistente-ia-plugin/wiki) y todas están disponibles en español, portugués e inglés.
  
