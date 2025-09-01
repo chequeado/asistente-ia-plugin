@@ -18,8 +18,8 @@ Agradecemos el aporte de [La Silla Vacía](https://lasillavacia.com) (Colombia),
 - ✅ Diseñada para organizaciones que buscan acelerar su proceso de adopción de IA en redacciones y otras áreas. 
 - ✅ Cuenta con una serie de tareas precargadas completamente personalizables.
 - ✅ Permite agregar nuevas tareas de forma rápida y sencilla.
-- ✅ Permite compartir tareas con dos clics (para compartir de forma automática ver <chequeabot.com>)
-- ✅ Solo requiere una clave de API de OpenAI para habilitar el uso de IA (listo tambien en <chequeabot.com>)
+- ✅ Permite compartir tareas con dos clics
+- ✅ Solo requiere una clave de API de OpenAI para habilitar el uso de IA
  
 ## 🚀 Instalación
 
